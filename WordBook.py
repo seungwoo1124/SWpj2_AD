@@ -6,22 +6,31 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+from word import Word
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import *
+
+from PyQt5 import QtCore, QtGui
 
 
-class Ui_MainWindow(object):
+class Ui_MainWindow(QWidget):
+
+    def __init__(self):
+        super().__init__()
+        self.word = Word()
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 914)
         MainWindow.setMinimumSize(QtCore.QSize(0, 0))
         MainWindow.setStyleSheet("background-color: rgb(191,150,208);\n"
 "")
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout = QVBoxLayout(self.centralwidget)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4 = QLabel(self.centralwidget)
         self.label_4.setMinimumSize(QtCore.QSize(0, 10))
         self.label_4.setMaximumSize(QtCore.QSize(16777215, 50))
         font = QtGui.QFont()
@@ -32,24 +41,24 @@ class Ui_MainWindow(object):
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.verticalLayout.addWidget(self.label_4)
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_3.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.horizontalLayout_3 = QHBoxLayout()
+        self.horizontalLayout_3.setSizeConstraint(QLayout.SetMinimumSize)
         self.horizontalLayout_3.setContentsMargins(40, 1, 40, 1)
         self.horizontalLayout_3.setSpacing(100)
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5 = QPushButton(self.centralwidget)
         self.pushButton_5.setMinimumSize(QtCore.QSize(0, 10))
         self.pushButton_5.setMaximumSize(QtCore.QSize(16777215, 30))
         self.pushButton_5.setSizeIncrement(QtCore.QSize(10, 30))
         self.pushButton_5.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.pushButton_5.setObjectName("pushButton_5")
         self.horizontalLayout_3.addWidget(self.pushButton_5)
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2 = QLabel(self.centralwidget)
         self.label_2.setMaximumSize(QtCore.QSize(90, 16777215))
         self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_3.addWidget(self.label_2)
-        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_4 = QPushButton(self.centralwidget)
         self.pushButton_4.setMinimumSize(QtCore.QSize(0, 10))
         self.pushButton_4.setMaximumSize(QtCore.QSize(16777215, 30))
         self.pushButton_4.setSizeIncrement(QtCore.QSize(10, 30))
@@ -57,10 +66,10 @@ class Ui_MainWindow(object):
         self.pushButton_4.setObjectName("pushButton_4")
         self.horizontalLayout_3.addWidget(self.pushButton_4)
         self.verticalLayout.addLayout(self.horizontalLayout_3)
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setContentsMargins(-1, 0, -1, -1)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label = QLabel(self.centralwidget)
         self.label.setMinimumSize(QtCore.QSize(0, 200))
         self.label.setMaximumSize(QtCore.QSize(16777215, 200))
         font = QtGui.QFont()
@@ -71,28 +80,28 @@ class Ui_MainWindow(object):
         self.label.setText("")
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label)
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.toolButton_2 = QtWidgets.QToolButton(self.centralwidget)
+        self.toolButton_2 = QToolButton(self.centralwidget)
         self.toolButton_2.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.toolButton_2.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.toolButton_2.setCheckable(False)
         self.toolButton_2.setObjectName("toolButton_2")
         self.verticalLayout_2.addWidget(self.toolButton_2)
-        self.toolButton_3 = QtWidgets.QToolButton(self.centralwidget)
+        self.toolButton_3 = QToolButton(self.centralwidget)
         self.toolButton_3.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.toolButton_3.setObjectName("toolButton_3")
         self.verticalLayout_2.addWidget(self.toolButton_3)
-        self.toolButton = QtWidgets.QToolButton(self.centralwidget)
+        self.toolButton = QToolButton(self.centralwidget)
         self.toolButton.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.toolButton.setObjectName("toolButton")
         self.verticalLayout_2.addWidget(self.toolButton)
         self.horizontalLayout_2.addLayout(self.verticalLayout_2)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
-        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(50)
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.pushButton = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton = QPushButton(self.centralwidget)
         self.pushButton.setMinimumSize(QtCore.QSize(100, 0))
         self.pushButton.setMaximumSize(QtCore.QSize(249, 16777215))
         self.pushButton.setStyleSheet("background-color: rgb(220, 173, 240);\n"
@@ -101,34 +110,34 @@ class Ui_MainWindow(object):
         self.pushButton.setAutoDefault(False)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
-        self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_2 = QPushButton(self.centralwidget)
         self.pushButton_2.setMinimumSize(QtCore.QSize(100, 0))
         self.pushButton_2.setMaximumSize(QtCore.QSize(249, 16777215))
         self.pushButton_2.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3 = QPushButton(self.centralwidget)
         self.pushButton_3.setMinimumSize(QtCore.QSize(100, 0))
         self.pushButton_3.setMaximumSize(QtCore.QSize(249, 16777215))
         self.pushButton_3.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.pushButton_3.setObjectName("pushButton_3")
         self.horizontalLayout.addWidget(self.pushButton_3)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea = QScrollArea(self.centralwidget)
         self.scrollArea.setMaximumSize(QtCore.QSize(16777215, 270))
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.scrollArea.setObjectName("scrollArea")
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 780, 268))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.textEdit = QtWidgets.QTextEdit(self.scrollAreaWidgetContents)
+        self.textEdit = QTextEdit(self.scrollAreaWidgetContents)
         self.textEdit.setGeometry(QtCore.QRect(10, 10, 761, 251))
         self.textEdit.setObjectName("textEdit")
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
@@ -149,11 +158,45 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "토익"))
         self.pushButton_3.setText(_translate("MainWindow", "공무원"))
 
+        self.textEdit.setReadOnly(True)
+
+        self.pushButton.clicked.connect(self.buttonClicked)
+        self.pushButton_2.clicked.connect(self.buttonClicked)
+        self.pushButton_3.clicked.connect(self.buttonClicked)
+
+    def buttonClicked(self):
+        button = self.sender()
+        key = button.text()
+
+        if key == "수능":
+            self.label_2.setText("수능")
+        elif key == "토익":
+            self.label_2.setText("토익")
+        elif key == "공무원":
+            self.label_2.setText("공무원")
+        elif key == "Dictionary":
+            if self.label_2.text() == "수능":
+                pass
+            elif self.label_2.text() == "토익":
+                pass
+            else:
+                pass
+
+        elif key == "Test":
+            if self.label_2.text() == "수능":
+                pass
+            elif self.label_2.text() == "토익":
+                pass
+            else:
+                pass
+
+
+
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
+    app = QApplication(sys.argv)
+    MainWindow = QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
