@@ -8,6 +8,8 @@
 
 from word import Word
 
+import random
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import *
 
@@ -19,6 +21,14 @@ class Ui_MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.word = Word()
+        self.s = self.word.readWords("suneung.txt")
+        self.sitem = list(self.s.items())
+        self.sidx = 0
+
+        self.t = self.word.readWords("toeic.txt")
+        self.g = self.word.readWords("gongmuwon.txt")
+
+        self.wrongword = {}
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -79,7 +89,15 @@ class Ui_MainWindow(QWidget):
         self.label.setStyleSheet("background-color: rgb(220, 173, 240);")
         self.label.setText("")
         self.label.setObjectName("label")
-        self.horizontalLayout_2.addWidget(self.label)
+
+        self.scrollArea2 = QScrollArea(self.centralwidget)
+        self.scrollArea2.setMaximumSize(QtCore.QSize(16777215, 270))
+        self.scrollArea2.setWidgetResizable(True)
+        self.scrollArea2.setAlignment(QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.scrollArea2.setObjectName("scrollArea2")
+        self.scrollArea2.setWidget(self.label)
+
+        self.horizontalLayout_2.addWidget(self.scrollArea2)
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.toolButton_2 = QToolButton(self.centralwidget)
@@ -151,9 +169,9 @@ class Ui_MainWindow(QWidget):
         self.pushButton_5.setText(_translate("MainWindow", "Test"))
         self.label_2.setText(_translate("MainWindow", "수능"))
         self.pushButton_4.setText(_translate("MainWindow", "Dictionary"))
-        self.toolButton_2.setText(_translate("MainWindow", "1. "))
-        self.toolButton_3.setText(_translate("MainWindow", "2. "))
-        self.toolButton.setText(_translate("MainWindow", "3. "))
+        self.toolButton_2.setText(_translate("MainWindow", "1"))
+        self.toolButton_3.setText(_translate("MainWindow", "2"))
+        self.toolButton.setText(_translate("MainWindow", "3"))
         self.pushButton.setText(_translate("MainWindow", "수능"))
         self.pushButton_2.setText(_translate("MainWindow", "토익"))
         self.pushButton_3.setText(_translate("MainWindow", "공무원"))
@@ -163,6 +181,11 @@ class Ui_MainWindow(QWidget):
         self.pushButton.clicked.connect(self.buttonClicked)
         self.pushButton_2.clicked.connect(self.buttonClicked)
         self.pushButton_3.clicked.connect(self.buttonClicked)
+        self.pushButton_4.clicked.connect(self.buttonClicked)
+        self.pushButton_5.clicked.connect(self.buttonClicked)
+        self.toolButton.clicked.connect(self.testButton)
+        self.toolButton_2.clicked.connect(self.testButton)
+        self.toolButton_3.clicked.connect(self.testButton)
 
     def buttonClicked(self):
         button = self.sender()
@@ -176,7 +199,11 @@ class Ui_MainWindow(QWidget):
             self.label_2.setText("공무원")
         elif key == "Dictionary":
             if self.label_2.text() == "수능":
-                pass
+                self.s = self.word.readWords("suneung.txt")
+                self.label.setText("")
+                for key, value in self.s.items():
+                    self.label.setText(self.label.text() + key + "\t" + value + "\n")
+
             elif self.label_2.text() == "토익":
                 pass
             else:
@@ -184,11 +211,78 @@ class Ui_MainWindow(QWidget):
 
         elif key == "Test":
             if self.label_2.text() == "수능":
-                pass
+                self.s = self.word.readWords("suneung.txt")
+                self.sitem = list(self.s.items())
+                print(self.sitem)
+                self.sidx = 0
+                self.wrongword = {}
+
+                self.label.setText(self.sitem[self.sidx][0])
+
+                a = random.randrange(1, 4)
+                b = random.randrange(1, len(self.sitem))
+                c = random.randrange(1, len(self.sitem))
+
+                if a == 1:
+                    self.toolButton_2.setText(self.sitem[self.sidx][1])
+                    self.toolButton.setText(self.sitem[b][1])
+                    self.toolButton_3.setText(self.sitem[c][1])
+
+                elif a == 2:
+                    self.toolButton_3.setText(self.sitem[self.sidx][1])
+                    self.toolButton.setText(self.sitem[b][1])
+                    self.toolButton_2.setText(self.sitem[c][1])
+                else:
+                    self.toolButton.setText(self.sitem[self.sidx][1])
+                    self.toolButton_2.setText(self.sitem[b][1])
+                    self.toolButton_3.setText(self.sitem[c][1])
+
+
             elif self.label_2.text() == "토익":
                 pass
             else:
                 pass
+
+    def testButton(self):
+        button = self.sender()
+        key = button.text()
+        if self.toolButton.text() == '3' or self.toolButton_2.text() == '1' or self.toolButton_3.text() == '2':
+            return
+        if self.label_2.text() == "수능":
+            if self.s[self.label.text()] != key:
+                self.wrongword[self.label.text()] = key
+
+            if self.sidx == len(self.sitem) - 1:
+                self.label.setText("테스트가 끝났습니다.")
+                self.word.writeWords('wrong.txt', self.wrongword)
+                f = self.word.readWords('wrong.txt')
+                for key, value in f.items():
+                    self.textEdit.append(key + "\t" + value)
+                return
+
+            self.sidx += 1
+
+            print(self.sidx)
+
+            self.label.setText(self.sitem[self.sidx][0])
+
+            a = random.randrange(1, 4)
+            b = random.randrange(1, len(self.sitem))
+            c = random.randrange(1, len(self.sitem))
+
+            if a == 1:
+                self.toolButton_2.setText(self.sitem[self.sidx][1])
+                self.toolButton.setText(self.sitem[b][1])
+                self.toolButton_3.setText(self.sitem[c][1])
+
+            elif a == 2:
+                self.toolButton_3.setText(self.sitem[self.sidx][1])
+                self.toolButton.setText(self.sitem[b][1])
+                self.toolButton_2.setText(self.sitem[c][1])
+            else:
+                self.toolButton.setText(self.sitem[self.sidx][1])
+                self.toolButton_2.setText(self.sitem[b][1])
+                self.toolButton_3.setText(self.sitem[c][1])
 
 
 
