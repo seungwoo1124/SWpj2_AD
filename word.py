@@ -30,3 +30,4 @@ if __name__ == "__main__":
     word = Word()
     f = word.readWords("suneung.txt")
     print(f)
+    word.writeWords("wrong.txt", f)

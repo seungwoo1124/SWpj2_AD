@@ -238,6 +238,7 @@ class Ui_MainWindow(QWidget):
                 self.toolButton_3.setText("1")
 
         elif key == "Test":
+            self.textEdit.setText("")
             if self.label_2.text() == "수능":
                 self.s = self.word.readWords("suneung.txt")
                 self.sitem = list(self.s.items())
@@ -323,6 +324,8 @@ class Ui_MainWindow(QWidget):
         button = self.sender()
         key = button.text()
         if self.toolButton.text() == '3' or self.toolButton_2.text() == '1' or self.toolButton_3.text() == '2':
+            return
+        elif self.textEdit_2.toPlainText() == "테스트가 끝났습니다.":
             return
         if self.label_2.text() == "수능":
             if self.s[self.textEdit_2.toPlainText()] != key:
